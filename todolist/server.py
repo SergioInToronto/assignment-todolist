@@ -11,6 +11,7 @@ def build():
     app.add_url_rule("/api/todos", view_func=list_todos, methods=["GET"])
     app.add_url_rule("/api/todos", view_func=create_todo, methods=["POST"])
     app.add_url_rule("/api/todos/<todo_id>", view_func=update_todo, methods=["PUT"])
+    app.add_url_rule("/api/todos/<todo_id>", view_func=delete_todo, methods=["DELETE"])
     return app
 
 
@@ -27,5 +28,11 @@ def create_todo():
 
 @view_decorators.check_schema("todo_create_or_update")
 def update_todo(todo_id):
+    database.get()  # throws 404 if not found
     response = database.save(todo_id, flask.request.get_json())
+    return response
+
+
+def delete_todo(todo_id):
+    response = database.delete(todo_id)
     return (response, 201)
