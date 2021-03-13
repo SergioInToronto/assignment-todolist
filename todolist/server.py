@@ -15,6 +15,9 @@ def build():
     return app
 
 
+# Note: In a bigger application I would put views into their own file(s)
+
+
 def list_todos():
     return database.list()
 
@@ -22,17 +25,16 @@ def list_todos():
 @view_decorators.check_schema("todo_create_or_update")
 def create_todo():
     todo_id = str(uuid.uuid4())
-    response = database.save(todo_id, flask.request.get_json())
-    return (response, 201)
+    response = database.create(todo_id, flask.request.get_json())
+    return (response, 201)  # Skipped due to time constraint: HTTP 201 must return 'location' header
 
 
 @view_decorators.check_schema("todo_create_or_update")
 def update_todo(todo_id):
-    database.get()  # throws 404 if not found
-    response = database.save(todo_id, flask.request.get_json())
+    response = database.update(todo_id, flask.request.get_json())
     return response
 
 
 def delete_todo(todo_id):
     response = database.delete(todo_id)
-    return (response, 201)
+    return ('', 204)
