@@ -34,17 +34,22 @@ def get(todo_id):
 
 def create(todo_id, todo):
     with database_engine.connect() as db_con:
-        res = db_con.execute("INSERT INTO todos VALUES (%s, %s)", todo_id, json.dumps(todo))
+        db_con.execute("INSERT INTO todos VALUES (%s, %s)", todo_id, json.dumps(todo))
     return get(todo_id)
 
 
 def update(todo_id, todo):
     get(todo_id)  # throws 404 if not found
     with database_engine.connect() as db_con:
-        res = db_con.execute("UPDATE todos SET contents=%s WHERE id=%s", json.dumps(todo), todo_id)
+        db_con.execute("UPDATE todos SET contents=%s WHERE id=%s", json.dumps(todo), todo_id)
     return get(todo_id)
 
 
 def delete(todo_id):
     with database_engine.connect() as db_con:
-        res = db_con.execute("DELETE FROM todos WHERE id=%s", todo_id)
+        db_con.execute("DELETE FROM todos WHERE id=%s", todo_id)
+
+
+def delete_all_complete():
+    with database_engine.connect() as db_con:
+        db_con.execute("DELETE FROM todos WHERE (contents ->> 'completion')='complete'")

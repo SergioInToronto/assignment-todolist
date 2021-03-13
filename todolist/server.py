@@ -11,6 +11,7 @@ def build():
     app.add_url_rule("/api/todos", view_func=list_todos, methods=["GET"])
     app.add_url_rule("/api/todos", view_func=create_todo, methods=["POST"])
     app.add_url_rule("/api/todos/<todo_id>", view_func=update_todo, methods=["PUT"])
+    app.add_url_rule("/api/todos/all-complete", view_func=delete_all_complete, methods=["DELETE"])
     app.add_url_rule("/api/todos/<todo_id>", view_func=delete_todo, methods=["DELETE"])
     return app
 
@@ -36,5 +37,10 @@ def update_todo(todo_id):
 
 
 def delete_todo(todo_id):
-    response = database.delete(todo_id)
+    database.delete(todo_id)
+    return ('', 204)
+
+
+def delete_all_complete():
+    database.delete_all_complete()
     return ('', 204)
