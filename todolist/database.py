@@ -16,17 +16,18 @@ database_engine = database_management.get_engine()
 # I wanted to find out if writing queries myself is faster than the other 2 approaches.
 # Well, it's not. It's error-prone. Using Table() objects would have been better. Lesson learned.
 
+
 def list():
     with database_engine.connect() as db_con:
         res = db_con.execute("SELECT * FROM todos")
-        result = {str(x['id']): x['contents'] for x in res}  # execute() returns lazy results. Fetch them now
+        result = {str(x["id"]): x["contents"] for x in res}  # execute() returns lazy results. Fetch them now
     return result
 
 
 def get(todo_id):
     with database_engine.connect() as db_con:
         res = db_con.execute("SELECT * FROM todos WHERE id=%s", todo_id)
-    result = {str(x['id']): x['contents'] for x in res}  # execute() returns lazy results. Fetch them now
+    result = {str(x["id"]): x["contents"] for x in res}  # execute() returns lazy results. Fetch them now
     if not result:
         raise exceptions.NotFound(f'todo item with ID "{todo_id}" does not exist.')
     return result

@@ -38,9 +38,9 @@ def update_todo(todo_id):
 
 def delete_todo(todo_id):
     database.delete(todo_id)
-    return ('', 204)
+    return ("", 204)
 
 
 def delete_all_complete():
     database.delete_all_complete()
-    return ('', 204)
+    return ("", 204)

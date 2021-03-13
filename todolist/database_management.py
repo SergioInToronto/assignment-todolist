@@ -7,9 +7,11 @@ from sqlalchemy.dialects.postgresql import UUID, JSONB
 
 _metadata = MetaData()
 
-table_todos = Table('todos', _metadata,
-    Column('id', UUID(as_uuid=True), primary_key=True, default=uuid.uuid4),
-    Column('contents', JSONB),  # I'm using postgres as a document store
+table_todos = Table(
+    "todos",
+    _metadata,
+    Column("id", UUID(as_uuid=True), primary_key=True, default=uuid.uuid4),
+    Column("contents", JSONB),  # I'm using postgres as a document store
 )
 
 
