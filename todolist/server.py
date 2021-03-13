@@ -2,7 +2,7 @@ import uuid
 
 import flask
 
-from todolist import database
+from todolist import database, view_decorators
 
 
 def build():
@@ -18,12 +18,14 @@ def list_todos():
     return database.list()
 
 
+@view_decorators.check_schema("todo_create_or_update")
 def create_todo():
     todo_id = str(uuid.uuid4())
     response = database.save(todo_id, flask.request.get_json())
     return (response, 201)
 
 
+@view_decorators.check_schema("todo_create_or_update")
 def update_todo(todo_id):
     response = database.save(todo_id, flask.request.get_json())
     return (response, 201)

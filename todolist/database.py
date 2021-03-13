@@ -1,5 +1,9 @@
 # TODO: actually use a database
 
+# import sqlalchemy
+# engine = sqlalchemy.create_engine('sqlite:///:memory:', echo=True)
+
+
 db = {}
 
 
@@ -8,6 +12,5 @@ def list():
 
 
 def save(todo_id, todo):
-    db[todo_id] = todo;
+    db[todo_id] = todo
     return todo
-
