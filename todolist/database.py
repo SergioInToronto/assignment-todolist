@@ -1,10 +1,8 @@
 import json
-import os
 
 # A full application may want db, internal logic, and views to have their own error types.
 # For brevity, my db throws web-server errors directly
 from werkzeug import exceptions
-import sqlalchemy
 
 from todolist import database_management
 
@@ -17,7 +15,7 @@ database_engine = database_management.get_engine()
 # Well, it's not. It's error-prone. Using Table() objects would have been better. Lesson learned.
 
 
-def list():
+def list_():
     with database_engine.connect() as db_con:
         res = db_con.execute("SELECT * FROM todos")
         result = {str(x["id"]): x["contents"] for x in res}  # execute() returns lazy results. Fetch them now

@@ -20,7 +20,7 @@ def build():
 
 
 def list_todos():
-    return database.list()
+    return database.list_()
 
 
 @view_decorators.check_schema("todo_create_or_update")

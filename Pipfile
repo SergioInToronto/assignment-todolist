@@ -10,6 +10,11 @@ sqlalchemy = "*"
 "psycopg2" = "*"
 
 [dev-packages]
+pylint = "*"
+black = "*"
 
 [requires]
 python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true
