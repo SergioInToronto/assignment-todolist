@@ -45,6 +45,7 @@ def update(todo_id, todo):
 
 
 def delete(todo_id):
+    get(todo_id)  # throws 404 if not found
     with database_engine.connect() as db_con:
         db_con.execute("DELETE FROM todos WHERE id=%s", todo_id)
 
