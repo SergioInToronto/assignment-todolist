@@ -1,4 +1,4 @@
-# A TODO list backend
+# A Todo List Backend
 
 Public URL: https://sergio-todolist-for-northone.herokuapp.com/
 
@@ -74,9 +74,9 @@ With time, I could add a lot more. Some examples:
 * Request schemas
 * Email or SMS reminders, using Twilio for example
     * Notifications from the browser could be implemented client-side
-* Adding created_at field and a notify_threshold, we could reminder users of tasks they may have forgotten about
+* Adding created_at field and a notify_threshold, we could reminder users of tasks that may have been forgotten
 * The ability to freely re-arrange items. Interestingly, that was not a requirement ;)
 * Multiple users, where each user can only see their own items
 * If lists became large:
     * Pagination
-    * A calendar view (while list is small, it's faster to fetch all items and let the front-end produce a calendar view)
+    * A calendar view API (while list is small, it's faster to fetch all items and let the front-end produce a calendar view)
